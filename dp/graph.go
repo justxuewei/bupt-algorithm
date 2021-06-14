@@ -1,5 +1,9 @@
 package dp
 
+import "math"
+
+const Inf = math.MaxInt64
+
 type Graph [][]int
 
 func NewGraph(nNodes int) Graph {
@@ -9,6 +13,9 @@ func NewGraph(nNodes int) Graph {
 	graph := make([][]int, nNodes)
 	for i:=0; i<nNodes; i++ {
 		graph[i] = make([]int, nNodes)
+		for j:=0; j<nNodes; j++ {
+			graph[i][j] = Inf
+		}
 	}
 	return graph
 }

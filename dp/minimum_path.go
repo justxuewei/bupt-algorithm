@@ -1,28 +1,37 @@
 package dp
 
-import "math"
-
 func minimumPath(graph Graph) int {
 	if len(graph) == 0 && len(graph) != len(graph[0]) {
 		return 0
 	}
 	dp := make([]int, len(graph))
-	for i:=0; i<graph.NumOfNodes()-1; i++ {
-		dp[i] = math.MaxInt64
+	for i:=1; i<graph.NumOfNodes(); i++ {
+		dp[i] = Inf
 	}
-	dp[graph.NumOfNodes()-1] = 0
-	minimumPathDP(graph, dp, graph.NumOfNodes()-1)
-	return dp[0]
+	dp[0] = 0
+	getMinimumPath(graph, dp, graph.NumOfNodes()-1)
+	return dp[graph.NumOfNodes()-1]
 }
 
-func minimumPathDP(graph Graph, dp []int, node int) {
-	if node == 0 {
+func getMinimumPath(graph Graph, dp []int, node int) {
+	if dp[node] != Inf {
 		return
 	}
-	for i:=0; i<len(graph); i++ {
-		if graph[i][node] != 0 && dp[i] > dp[node]+graph[i][node] {
-			dp[i] = dp[node]+graph[i][node]
-			minimumPathDP(graph, dp, i)
+	minpath := Inf
+	for i:=0; i<graph.NumOfNodes(); i++ {
+		if graph[i][node] != Inf {
+			if dp[i] == Inf {
+				getMinimumPath(graph, dp, i)
+			}
+			minpath = min(minpath, dp[i] + graph[i][node])
 		}
 	}
+	dp[node] = minpath
+}
+
+func min(lhs, rhs int) int {
+	if lhs < rhs {
+		return lhs
+	}
+	return rhs
 }
