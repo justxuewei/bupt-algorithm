@@ -11,9 +11,9 @@ func NewGraph(nNodes int) Graph {
 		return nil
 	}
 	graph := make([][]int, nNodes)
-	for i:=0; i<nNodes; i++ {
+	for i := 0; i < nNodes; i++ {
 		graph[i] = make([]int, nNodes)
-		for j:=0; j<nNodes; j++ {
+		for j := 0; j < nNodes; j++ {
 			graph[i][j] = Inf
 		}
 	}

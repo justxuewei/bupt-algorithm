@@ -5,7 +5,7 @@ func minimumPath(graph Graph) int {
 		return 0
 	}
 	dp := make([]int, len(graph))
-	for i:=1; i<graph.NumOfNodes(); i++ {
+	for i := 1; i < graph.NumOfNodes(); i++ {
 		dp[i] = Inf
 	}
 	dp[0] = 0
@@ -18,12 +18,12 @@ func getMinimumPath(graph Graph, dp []int, node int) {
 		return
 	}
 	minpath := Inf
-	for i:=0; i<graph.NumOfNodes(); i++ {
+	for i := 0; i < graph.NumOfNodes(); i++ {
 		if graph[i][node] != Inf {
 			if dp[i] == Inf {
 				getMinimumPath(graph, dp, i)
 			}
-			minpath = min(minpath, dp[i] + graph[i][node])
+			minpath = min(minpath, dp[i]+graph[i][node])
 		}
 	}
 	dp[node] = minpath
