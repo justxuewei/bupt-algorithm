@@ -1,4 +1,6 @@
-package dp
+package dynamic_programming
+
+import "algorithm/foundation"
 
 func minimumPath(graph Graph) int {
 	if len(graph) == 0 && len(graph) != len(graph[0]) {
@@ -23,15 +25,8 @@ func getMinimumPath(graph Graph, dp []int, node int) {
 			if dp[i] == Inf {
 				getMinimumPath(graph, dp, i)
 			}
-			minpath = min(minpath, dp[i]+graph[i][node])
+			minpath = foundation.Min(minpath, dp[i]+graph[i][node])
 		}
 	}
 	dp[node] = minpath
-}
-
-func min(lhs, rhs int) int {
-	if lhs < rhs {
-		return lhs
-	}
-	return rhs
 }
